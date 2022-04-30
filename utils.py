@@ -7,8 +7,7 @@ import pandas as pd
 def convert_df_to_log(df):
     log_csv = dataframe_utils.convert_timestamp_columns_in_df(df)
     log_csv = log_csv.sort_values('timestamp')
-    log = log_converter.apply(log_csv)
-    return log
+    return log_converter.apply(log_csv)
 
 def get_variants_count(log):
     variants_count = case_statistics.get_variant_statistics(log)

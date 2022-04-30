@@ -17,12 +17,12 @@ from pm4py.objects.log.util import dataframe_utils
 from pm4py.objects.conversion.log import converter as log_converter
 from pm4py.statistics.traces.generic.log import case_statistics
 
-GLOBAL_VARS = {}
-
-GLOBAL_VARS["celonis"] = get_celonis(
-    url="https://academic-aravind-sankaran-rwth-aachen-de.eu-2.celonis.cloud",
-    api_token = "OWIyODI0ZTYtZDYyMS00N2QwLTk1ZTEtN2ZhN2U3NGYzYjg0Okp2a3FQeUNNanovVjM0K0ZHTVNpbTJPQWt1Y2RtZGdINlR2THRDbHd3Y1By"
-)
+GLOBAL_VARS = {
+    "celonis": get_celonis(
+        url="https://academic-aravind-sankaran-rwth-aachen-de.eu-2.celonis.cloud",
+        api_token="OWIyODI0ZTYtZDYyMS00N2QwLTk1ZTEtN2ZhN2U3NGYzYjg0Okp2a3FQeUNNanovVjM0K0ZHTVNpbTJPQWt1Y2RtZGdINlR2THRDbHd3Y1By",
+    )
+}
 
 
 @app.route("/loaddata")
@@ -63,9 +63,8 @@ def get_trace_counts():
 def get_variants_table():
     GLOBAL_VARS["variant_table"] = utils.get_variants_table(GLOBAL_VARS["dataframe"])
     json_data = GLOBAL_VARS["variant_table"].to_json(orient='index')
-    response = {'data': json_data}
     #response.headers.add('Access-Control-Allow-Origin', '*')
-    return response
+    return {'data': json_data}
 
 
 @app.route("/activitiescounts")
